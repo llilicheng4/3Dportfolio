@@ -7,23 +7,15 @@ import { BoxGeometry, Mesh, MeshBasicMaterial } from 'three'
 import { Cube } from './components/Cube'
 import { Plane } from './components/Plane'
 import { Sphere } from './components/Sphere'
+import { PointSphere } from './components/PointSphere'
 
 function Scene() {
   const { performance } = useControls('Monitoring', {
     performance: false,
   })
 
-  const { animate } = useControls('Cube', {
-    animate: true,
-  })
-
-  const cubeRef = useRef<Mesh<BoxGeometry, MeshBasicMaterial>>(null)
-
-  useFrame((_, delta) => {
-    if (animate) {
-      cubeRef.current!.rotation.y += delta / 3
-    }
-  })
+  const data = {color: "white", pointx: 60, pointy:60};
+  const data2 = {color: "green", pointx: 120, pointy:120};
 
   return (
     <>
@@ -39,9 +31,8 @@ function Scene() {
       />
       <ambientLight intensity={0.2} />
 
-      <Cube ref={cubeRef} />
-      <Sphere />
-      <Plane />
+      <PointSphere data = {data} />
+      <PointSphere data = {data2} />
     </>
   )
 }
